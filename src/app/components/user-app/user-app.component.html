@@ -1,0 +1,15 @@
+<div class="container my-4">
+    <h3> {{title}} </h3>
+    <button class="btn btn-info btn-sm my-3" (click)="setIsOpen()"> Crear Usuario </button>
+    <div class="row">
+        <div class="col">
+            <app-user-view [users]="users" (idUserEventEmitter)="onRemove($event)"
+                (selectedUserEventEmitter)="onUserSelected($event)" />
+        </div>
+    </div>
+</div>
+@if (isOpen) {
+<div class="abrir-modal animacion fadeIn">
+    <app-user-form (newUserEventEmitter)="addUser($event)" [user]="userSelected" (closeEventEmitter)="setIsOpen()" />
+</div>
+}

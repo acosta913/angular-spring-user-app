@@ -1,0 +1,92 @@
+<div class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> {{user.id >
+                    0 ? 'Editar':
+                    'Agregar'}} Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="onCloseModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
+                    <div class="card">
+                        <div class="card-body">
+                            <input name="name" class="form-control my-2" placeholder="Nombre" [(ngModel)]="user.name"
+                                required #name="ngModel">
+                            @if (name.invalid && (name.dirty || name.touched)) {
+                            @if (name.errors!['required']) {
+                            <div class="text-danger">
+                                El nombre es requerido
+                            </div>
+                            }
+                            }
+                            <input name="lastname" class="form-control my-2" placeholder="Apellido"
+                                [(ngModel)]="user.lastname" required #lastname="ngModel">
+                            @if (lastname.invalid && (lastname.dirty || lastname.touched)) {
+                            @if (lastname.errors!['required']) {
+                            <div class="text-danger" role="alert">
+                                El apellido es requerido
+                            </div>
+                            }
+                            }
+                            <input name="email" class="form-control my-2" placeholder="Correo" [(ngModel)]="user.email"
+                                required type="email" #email="ngModel" email>
+                            @if (email.invalid && (email.dirty || email.touched)) {
+                            @if (email.errors!['required']) {
+                            <div class="text-danger" role="alert">
+                                El correo es requerido
+                            </div>
+                            }
+                            @if (email.errors!['email']) {
+                            <div class="text-danger" role="alert">
+                                El correo no es valido
+                            </div>
+                            }
+                            }
+                            <input name="username" class="form-control my-2" placeholder="Usuario"
+                                [(ngModel)]="user.username" required minlength="4" #username="ngModel">
+                            @if (username.invalid && (username.dirty || username.touched)) {
+                            @if (username.errors!['required']) {
+                            <div class="text-danger" role="alert">
+                                El usuario es requerido
+                            </div>
+                            }
+                            @if (username.errors!['minlength']) {
+                            <div class="text-danger" role="alert">
+                                Numero maximo 4 caracteres
+                            </div>
+                            }
+                            }
+                            <input name="password" class="form-control my-2" placeholder="Contraseña" type="password"
+                                [(ngModel)]="user.password" required minlength="4" #password="ngModel">
+                            @if (password.invalid && (password.dirty || password.touched)) {
+                            @if (password.errors!['required']) {
+                            <div class="text-danger" role="alert">
+                                El nombre es requerido
+                            </div>
+                            }
+                            @if (password.errors!['minlength']) {
+                            <div class="text-danger" role="alert">
+                                Numero maximo 4 caracteres
+                            </div>
+                            }
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary m-2" [disabled]="userForm.invalid" type="submit"> {{user.id >
+                                0 ? 'Editar':
+                                'Agregar'}}
+                            </button>
+                            <button class="btn btn-info m-2" (click)="onClear(userForm)">Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="onCloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
