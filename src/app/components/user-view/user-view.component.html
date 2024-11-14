@@ -1,3 +1,5 @@
+<h3> {{title}} </h3>
+<button class="btn btn-info btn-sm my-3" [routerLink]="['/users/create']"> Crear Usuario </button>
 @if (users.length > 0) {
 <table class="table table-striped table-hover">
     <thead>
@@ -20,7 +22,7 @@
             <th> {{user.email}} </th>
             <th> {{user.username}} </th>
             <th><button class="btn btn-danger btn-sm" (click)="onRemoveUser(user.id)">Eliminar</button></th>
-            <th><button class="btn btn-warning btn-sm" (click)="onEditUserSelected(user)">Editar</button></th>
+            <th><button class="btn btn-warning btn-sm" [routerLink]="['/users/edit', user.id]">Editar</button></th>
         </tr>
         }
 
