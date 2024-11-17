@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         <input name="name" class="form-control my-2" placeholder="Nombre" [(ngModel)]="user.name"
-                            required #name="ngModel">
+                            #name="ngModel"><!--required-->
                         @if (name.invalid && (name.dirty || name.touched)) {
                         @if (name.errors!['required']) {
                         <div class="text-danger">
@@ -19,7 +19,7 @@
                         }
                         }
                         <input name="lastname" class="form-control my-2" placeholder="Apellido"
-                            [(ngModel)]="user.lastname" required #lastname="ngModel">
+                            [(ngModel)]="user.lastname" #lastname="ngModel"><!--required-->
                         @if (lastname.invalid && (lastname.dirty || lastname.touched)) {
                         @if (lastname.errors!['required']) {
                         <div class="text-danger" role="alert">
@@ -28,7 +28,7 @@
                         }
                         }
                         <input name="email" class="form-control my-2" placeholder="Correo" [(ngModel)]="user.email"
-                            required type="email" #email="ngModel" email>
+                            type="email" #email="ngModel"><!--required email-->
                         @if (email.invalid && (email.dirty || email.touched)) {
                         @if (email.errors!['required']) {
                         <div class="text-danger" role="alert">
@@ -42,7 +42,7 @@
                         }
                         }
                         <input name="username" class="form-control my-2" placeholder="Usuario"
-                            [(ngModel)]="user.username" required minlength="4" #username="ngModel">
+                            [(ngModel)]="user.username" #username="ngModel"><!--required minlength="4"-->
                         @if (username.invalid && (username.dirty || username.touched)) {
                         @if (username.errors!['required']) {
                         <div class="text-danger" role="alert">
@@ -56,7 +56,7 @@
                         }
                         }
                         <input name="password" class="form-control my-2" placeholder="Contraseña" type="password"
-                            [(ngModel)]="user.password" required minlength="4" #password="ngModel">
+                            [(ngModel)]="user.password" #password="ngModel"><!--required minlength="4"-->
                         @if (password.invalid && (password.dirty || password.touched)) {
                         @if (password.errors!['required']) {
                         <div class="text-danger" role="alert">

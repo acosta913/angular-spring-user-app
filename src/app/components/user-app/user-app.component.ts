@@ -24,7 +24,6 @@ export class UserAppComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     this.service.findAll().subscribe(users => this.users = users);
     this.addUser();
@@ -41,11 +40,32 @@ export class UserAppComponent implements OnInit {
 
   addUser() {
     this.sharingData.newUserEventEmitter.subscribe(user => {
-      if (user.id > 0) { this.users = this.users.map(u => (u.id === user.id) ? { ...user } : u) }
-      else {
-        this.users = [...this.users, { ...user, id: new Date().getTime() }];
+      if (user.id > 0) {
+        this.service.update(user).subscribe(
+          {
+            next: (userUpdate) => {
+              this.users = this.users.map(u => (u.id === userUpdate.id) ? { ...userUpdate } : u);
+              this.router.navigate(['/users'], { state: this.users });
+            },
+            error: (e) => {
+              console.log(e.error);
+            }
+          },
+        );
       }
-      this.router.navigate(['/users'], { state: { users: this.users } });
+      else {
+        this.service.create(user).subscribe(
+          {
+            next: (userNew) => {
+              this.users = [...this.users, { ...userNew }];
+              this.router.navigate(['/users'], { state: this.users });
+            },
+            error: (e) => {
+              console.log(e.error);
+            }
+          }
+        );
+      }
       Swal.fire({
         title: "Good job!",
         text: "You clicked the button!",
@@ -66,15 +86,19 @@ export class UserAppComponent implements OnInit {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          this.users = this.users.filter(user => user.id !== id);
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-          this.router.navigate(['/users/create'], { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/users'], { state: { users: this.users } });
-          });
+          this.service.delete(id).subscribe(
+            () => {
+              this.users = this.users.filter(user => user.id !== id);
+              this.router.navigate(['/users/create'], { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/users'], { state: this.users });
+              }
+              );
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            });
         }
       });
     });
