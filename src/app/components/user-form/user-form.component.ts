@@ -36,11 +36,11 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit(userForm: NgForm): void {
-    if (userForm.valid) {
-      this.sharingData.newUserEventEmitter.emit(this.user);
-    }
-    userForm.reset();
-    userForm.resetForm();
+    //if (userForm.valid) {
+    this.sharingData.newUserEventEmitter.emit(this.user);
+    //}
+    // userForm.reset();
+    // userForm.resetForm();
   }
 
   onClear(userForm: NgForm): void {

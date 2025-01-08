@@ -9,16 +9,32 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/users']"
-                        [state]="{users}">Usuarios</a>
+                        [state]="{users, paginator}">Usuarios</a>
                 </li>
+                @if (admin) {
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['users/create']">Crear</a>
                 </li>
+                }
+
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedAuth">
+            <span class="nav-item nav-link text-primary mx-3">
+                @if (login.isAuth) {
+
+                <button class="btn btn-outline-info" (click)="handlerLogOut()">Cerrar sesion
+                    {{login.user.username}}</button>
+                } @else {
+                <a class="btn btn-outline-primary" [routerLink]="['/login']">Login</a>
+                }
+
+            </span>
+
         </div>
     </div>
 </nav>

@@ -1,0 +1,18 @@
+@if (paginator.totalPages > 1) {
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li class="page-item">
+            <a class="page-link" [routerLink]="[url, 0]">First</a>
+        </li>
+        <li class="page-item" [className]="paginator.number > 0 ? 'enabled':'disabled'">
+            <a class="page-link" [routerLink]="[url, paginator.number - 1]">Back</a>
+        </li>
+        <li class="page-item" [className]="paginator.number < paginator.totalPages - 1 ? 'enabled':'disabled'">
+            <a class="page-link" [routerLink]="[url, paginator.number + 1]">Next</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" [routerLink]="[url, paginator.totalPages - 1]">Last</a>
+        </li>
+    </ul>
+</nav>
+}
